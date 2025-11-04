@@ -21,6 +21,7 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
     implementation("javax.persistence:javax.persistence-api:2.2")
+    implementation("org.springframework.data:spring-data-jpa:3.5.5")
     implementation("org.springframework:spring-web:6.2.12")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

@@ -1,4 +1,6 @@
-package com.thecoffeetaster.entity;
+package com.thecoffeetaster.review.infrastructure.persistence.entity;
+
+import com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.entity.CoffeeEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,7 +12,7 @@ public class CoffeeReview {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @ManyToOne
-    private Coffee coffee;
+    private CoffeeEntity coffee;
     private String author;
     private Date date;
     private String brewMethod;

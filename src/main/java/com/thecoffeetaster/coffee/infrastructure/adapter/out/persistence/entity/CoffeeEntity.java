@@ -1,16 +1,16 @@
-package com.thecoffeetaster.entity;
+package com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.entity;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
-public class Coffee {
+public class CoffeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
         private UUID id;
     @ManyToOne
-    private BeanType beanType;
+    private BeanTypeEntity beanType;
     private String origin;
     private int altitude;
     private String brand;

@@ -1,4 +1,4 @@
-package com.thecoffeetaster.entity;
+package com.thecoffeetaster.user.infrastructure.persistence.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,9 +7,10 @@ import javax.persistence.Id;
 import java.util.UUID;
 
 @Entity
-public class BeanType {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
+    private String email;
 }
