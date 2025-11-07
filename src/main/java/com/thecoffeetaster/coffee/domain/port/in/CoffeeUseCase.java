@@ -1,4 +1,4 @@
-package com.thecoffeetaster.coffee.application.port.in;
+package com.thecoffeetaster.coffee.domain.port.in;
 
 import com.thecoffeetaster.coffee.domain.model.Coffee;
 import org.springframework.data.domain.Page;
@@ -9,6 +9,6 @@ public interface CoffeeUseCase {
     Coffee create(Coffee coffee);
     Page<Coffee> get(int page, int pageSize);
     Coffee get(UUID id);
-    Coffee put(UUID id, Coffee coffee);
+    Coffee put(Coffee coffee);
     Coffee patch(UUID id, Coffee coffee);
 }

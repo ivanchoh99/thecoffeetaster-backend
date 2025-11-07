@@ -23,6 +23,8 @@ dependencies {
     implementation("javax.persistence:javax.persistence-api:2.2")
     implementation("org.springframework.data:spring-data-jpa:3.5.5")
     implementation("org.springframework:spring-web:6.2.12")
+    implementation("org.projectlombok:lombok:1.18.42")
+    implementation("jakarta.validation:jakarta.validation-api:3.1.1")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

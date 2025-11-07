@@ -1,23 +1,36 @@
 package com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.Builder;
+import lombok.Getter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Builder
+@Getter
 @Entity
 public class CoffeeEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-        private UUID id;
+    private UUID id;
     @ManyToOne
     private BeanTypeEntity beanType;
-    private String origin;
-    private int altitude;
+    @ManyToOne
+    private ProcessingMethodEntity processingMethod;
+    private String originCountry;
+    private String originRegion;
+    private String originCity;
+    private Integer altitude;
     private String brand;
-    private String process;
     private String tastingNotes;
     private String roaster;
     private String roastLevel;
-    private String price;
-    private Date date;
+    private BigDecimal price;
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

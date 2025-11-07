@@ -1,108 +1,155 @@
 package com.thecoffeetaster.coffee.domain.model;
 
-import com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.entity.BeanTypeEntity;
+import com.thecoffeetaster.coffee.domain.exception.CoffeeException;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Setter
+@Getter
 public class Coffee {
     private UUID id;
-    private BeanTypeEntity beanType;
-    private String origin;
+    private BeanType beanType;
+    private ProcessingMethod processingMethod;
+    private String originCountry;
+    private String originRegion;
+    private String originCity;
     private int altitude;
     private String brand;
-    private String process;
     private String tastingNotes;
     private String roaster;
-    private String roastLevel;
-    private String price;
-    private Date date;
+    private RoastLevel roastLevel;
+    private BigDecimal price;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public BeanTypeEntity getBeanType() {
-        return beanType;
+    private Coffee(Builder builder){
+        this.id = builder.id;
+        this.beanType = builder.beanType;
+        this.processingMethod = builder.processingMethod;
+        this.originCountry = builder.originCountry;
+        this.originRegion = builder.originRegion;
+        this.originCity = builder.originCity;
+        this.altitude = builder.altitude;
+        this.brand = builder.brand;
+        this.tastingNotes = builder.tastingNotes;
+        this.roaster = builder.roaster;
+        this.roastLevel = builder.roastLevel;
+        this.price = builder.price;
+        this.createdAt = builder.createdAt;
+        this.updatedAt = builder.updatedAt;
     }
 
-    public void setBeanType(BeanTypeEntity beanType) {
-        this.beanType = beanType;
+    public static class Builder {
+        private final String brand;
+        private final BigDecimal price;
+
+        private UUID id;
+        private BeanType beanType;
+        private ProcessingMethod processingMethod;
+        private int altitude;
+        private String originCountry;
+        private String originRegion;
+        private String originCity;
+        private String tastingNotes;
+        private String roaster;
+        private RoastLevel roastLevel = RoastLevel.UNKNOWN;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
+
+        public Builder(String brand, BigDecimal price) {
+            this.brand = brand;
+            this.price = price;
+        }
+
+        public Builder id(UUID id){
+            this.id = id;
+            return this;
+        }
+
+        public Builder altitude(int altitude){
+            this.altitude = altitude;
+            return this;
+        }
+
+        public Builder beanType(BeanType beanType) {
+            this.beanType = beanType;
+            return this;
+        }
+
+        public Builder processingMethod(ProcessingMethod processingMethod) {
+            this.processingMethod = processingMethod;
+            return this;
+        }
+
+        public Builder originCountry(String originCountry) {
+            this.originCountry = originCountry;
+            return this;
+        }
+
+        public Builder originRegion(String originRegion) {
+            this.originRegion = originRegion;
+            return this;
+        }
+
+        public Builder originCity(String originCity) {
+            this.originCity = originCity;
+            return this;
+        }
+
+        public Builder tastingNotes(String tastingNotes) {
+            this.tastingNotes = tastingNotes;
+            return this;
+        }
+
+        public Builder roaster(String roaster) {
+            this.roaster = roaster;
+            return this;
+        }
+
+        public Builder roastLevel(RoastLevel roastLevel) {
+            this.roastLevel = roastLevel;
+            return this;
+        }
+
+        public Builder createdAt(LocalDateTime createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        public Builder updatedAt(LocalDateTime updatedAt) {
+            this.updatedAt = updatedAt;
+            return this;
+        }
+
+        public Coffee build() {
+
+            if (altitude < 0) {
+                throw new CoffeeException("Altitude cannot be negative");
+            }
+            if (brand == null || brand.isBlank()) {
+                throw new CoffeeException("Brand cannot be null or empty");
+            }
+            if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
+                throw new CoffeeException("Price cannot be null or negative");
+            }
+
+
+            if (this.createdAt == null) {
+                this.createdAt = LocalDateTime.now();
+            }
+            if (this.updatedAt == null) {
+                this.updatedAt = LocalDateTime.now();
+            }
+
+            return new Coffee(this);
+        }
     }
 
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public Integer getAltitude() {
-        return altitude;
-    }
-
-    public void setAltitude(int altitude) {
-        this.altitude = altitude;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getProcess() {
-        return process;
-    }
-
-    public void setProcess(String process) {
-        this.process = process;
-    }
-
-    public String getTastingNotes() {
-        return tastingNotes;
-    }
-
-    public void setTastingNotes(String tastingNotes) {
-        this.tastingNotes = tastingNotes;
-    }
-
-    public String getRoaster() {
-        return roaster;
-    }
-
-    public void setRoaster(String roaster) {
-        this.roaster = roaster;
-    }
-
-    public String getRoastLevel() {
-        return roastLevel;
-    }
-
-    public void setRoastLevel(String roastLevel) {
-        this.roastLevel = roastLevel;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+    public static Builder builder(String brand, BigDecimal price) {
+        return new Builder(brand, price);
     }
 }
