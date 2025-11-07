@@ -5,7 +5,11 @@ import com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.entity.
 
 public class ProcessingMethodMapper {
 
-    public static ProcessingMethodEntity toEnity(ProcessingMethod processingMethod){
+    private ProcessingMethodMapper() {
+        throw new IllegalStateException("Mapper Class");
+    }
+
+    public static ProcessingMethodEntity toEnity(ProcessingMethod processingMethod) {
         return ProcessingMethodEntity.builder()
                 .id(processingMethod.getId())
                 .name(processingMethod.getName())

@@ -4,7 +4,9 @@ import com.thecoffeetaster.coffee.domain.model.BeanType;
 import com.thecoffeetaster.coffee.domain.model.Coffee;
 import com.thecoffeetaster.coffee.domain.model.ProcessingMethod;
 import com.thecoffeetaster.coffee.domain.model.RoastLevel;
+import com.thecoffeetaster.coffee.infrastructure.adapter.in.dto.request.CoffeePatch;
 import com.thecoffeetaster.coffee.infrastructure.adapter.in.dto.request.CoffeePost;
+import com.thecoffeetaster.coffee.infrastructure.adapter.in.dto.request.CoffeeUpdate;
 import com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.entity.BeanTypeEntity;
 import com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.entity.CoffeeEntity;
 import com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.entity.ProcessingMethodEntity;
@@ -12,10 +14,11 @@ import com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.entity.
 public class CoffeeMapper {
 
     private CoffeeMapper() {
-        throw  new IllegalStateException("Mapper Class");
+        throw new IllegalStateException("Mapper Class");
     }
 
-    public static Coffee toDomain(CoffeePost coffeePost, BeanType beanType, ProcessingMethod processingMethod, RoastLevel roastLevel){
+    public static Coffee toDomain(CoffeePost coffeePost, BeanType beanType, ProcessingMethod processingMethod) {
+        RoastLevel roastLevel = RoastLevel.fromString(coffeePost.roastLevel());
         return Coffee.builder(coffeePost.brand(), coffeePost.price())
                 .altitude(coffeePost.altitude())
                 .beanType(beanType)
@@ -29,7 +32,7 @@ public class CoffeeMapper {
                 .build();
     }
 
-    public static Coffee toDomain(CoffeeEntity coffeeEntity){
+    public static Coffee toDomain(CoffeeEntity coffeeEntity) {
         BeanType beanType = BeanTypeMapper.toDomain(coffeeEntity.getBeanType());
         ProcessingMethod processingMethod = ProcessingMethodMapper.toDomain(coffeeEntity.getProcessingMethod());
         RoastLevel roastLevel = RoastLevel.fromString(coffeeEntity.getRoastLevel());
@@ -62,6 +65,36 @@ public class CoffeeMapper {
                 .roaster(coffee.getRoaster())
                 .altitude(coffee.getAltitude())
                 .tastingNotes(coffee.getTastingNotes())
+                .build();
+    }
+
+    public static Coffee toDomain(CoffeeUpdate coffeeUpdate, BeanType beanType, ProcessingMethod processingMethod) {
+        RoastLevel roastLevel = RoastLevel.fromString(coffeeUpdate.roastLevel());
+        return Coffee.builder(coffeeUpdate.brand(), coffeeUpdate.price())
+                .altitude(coffeeUpdate.altitude())
+                .beanType(beanType)
+                .processingMethod(processingMethod)
+                .originCountry(coffeeUpdate.originCountry())
+                .originRegion(coffeeUpdate.originRegion())
+                .originCity(coffeeUpdate.originCity())
+                .roaster(coffeeUpdate.roaster())
+                .tastingNotes(coffeeUpdate.tastingNotes())
+                .roastLevel(roastLevel)
+                .build();
+    }
+
+    public static Coffee toDomain(CoffeePatch coffeePatch, BeanType beanType, ProcessingMethod processingMethod) {
+        RoastLevel roastLevel = RoastLevel.fromString(coffeePatch.roastLevel());
+        return Coffee.builder(coffeePatch.brand(), coffeePatch.price())
+                .altitude(coffeePatch.altitude())
+                .beanType(beanType)
+                .processingMethod(processingMethod)
+                .originCountry(coffeePatch.originCountry())
+                .originRegion(coffeePatch.originRegion())
+                .originCity(coffeePatch.originCity())
+                .roaster(coffeePatch.roaster())
+                .tastingNotes(coffeePatch.tastingNotes())
+                .roastLevel(roastLevel)
                 .build();
     }
 }
