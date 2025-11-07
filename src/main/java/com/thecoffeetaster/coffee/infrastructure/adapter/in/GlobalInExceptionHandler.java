@@ -1,6 +1,6 @@
 package com.thecoffeetaster.coffee.infrastructure.adapter.in;
 
-import com.thecoffeetaster.common.ApiErrorResponse;
+import com.thecoffeetaster.common.response.ApiErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

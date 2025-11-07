@@ -1,4 +1,4 @@
-package com.thecoffeetaster.common;
+package com.thecoffeetaster.common.response;
 
 import org.springframework.validation.BindingResult;
 
