@@ -1,5 +1,6 @@
 package com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.repository;
 
+import com.thecoffeetaster.coffee.domain.exception.CoffeeException;
 import com.thecoffeetaster.coffee.domain.port.out.CoffeeRepository;
 import com.thecoffeetaster.coffee.domain.model.Coffee;
 import com.thecoffeetaster.coffee.infrastructure.adapter.mapper.CoffeeMapper;
@@ -28,11 +29,14 @@ public class CoffeeRepositoryAdapter implements CoffeeRepository {
 
     @Override
     public Page<Coffee> get(Pageable pageable) {
-        return repository.findAll(pageable);
+        Page<CoffeeEntity> coffees = repository.findAll(pageable);
+        return coffees.map(CoffeeMapper::toDomain);
     }
 
     @Override
-    public Optional<Coffee> get(UUID id) {
-        return repository.findById(id);
+    public Coffee get(UUID id) {
+        Optional<CoffeeEntity> coffeeEntity = repository.findById(id);
+        if (coffeeEntity.isEmpty()) throw new CoffeeException(String.format("Coffee with id: %s not found", id));// TODO Custome Exception
+        return CoffeeMapper.toDomain(coffeeEntity.get());
     }
 }

@@ -17,7 +17,7 @@ public class Coffee {
     private String originCountry;
     private String originRegion;
     private String originCity;
-    private int altitude;
+    private Integer altitude;
     private String brand;
     private String tastingNotes;
     private String roaster;
@@ -50,7 +50,7 @@ public class Coffee {
         private UUID id;
         private BeanType beanType;
         private ProcessingMethod processingMethod;
-        private int altitude;
+        private Integer altitude;
         private String originCountry;
         private String originRegion;
         private String originCity;

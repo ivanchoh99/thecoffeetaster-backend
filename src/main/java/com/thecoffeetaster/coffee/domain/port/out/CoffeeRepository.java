@@ -10,5 +10,5 @@ import java.util.UUID;
 public interface CoffeeRepository {
     Coffee save(Coffee coffee);
     Page<Coffee> get(Pageable pageable);
-    Optional<Coffee> get(UUID id);
+    Coffee get(UUID id);
 }
