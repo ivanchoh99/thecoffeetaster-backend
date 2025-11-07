@@ -22,8 +22,6 @@ import java.util.UUID;
 public class CoffeService implements CoffeeUseCase {
 
     private final CoffeeRepository repository;
-    private final BeanTypeUseCase beanTypeService;
-    private final ProcessingMethodUseCase processingMethodService;
 
 
     @Override
@@ -48,51 +46,50 @@ public class CoffeService implements CoffeeUseCase {
 
     @Override
     public Coffee put(Coffee putCoffee) {
+        putCoffee.setUpdatedAt(LocalDateTime.now());
         return repository.save(putCoffee);
     }
 
 
     @Override
-    public Coffee patch(UUID id, CoffeePatch patchCoffee) {
+    public Coffee patch(UUID id, Coffee patchCoffee) {
         Coffee coffee = repository.get(id);
 
-
-        if (patchCoffee.beanType() != null) {
-            BeanType beanType = beanTypeService.get(UUID.fromString(patchCoffee.beanType()));
-            coffee.setBeanType(beanType);
+        if (patchCoffee.getBeanType() != null) {
+            coffee.setBeanType(patchCoffee.getBeanType());
         }
-        if (patchCoffee.processingMethod() != null) {
-            ProcessingMethod processingMethod = processingMethodService.get(UUID.fromString(patchCoffee.processingMethod()));
-            coffee.setProcessingMethod(processingMethod);
+        if (patchCoffee.getProcessingMethod() != null) {
+            coffee.setProcessingMethod(patchCoffee.getProcessingMethod());
         }
-        if (patchCoffee.originCountry() != null) {
-            coffee.setOriginCountry(patchCoffee.originCountry());
+        if (patchCoffee.getOriginCountry() != null) {
+            coffee.setOriginCountry(patchCoffee.getOriginCountry());
         }
-        if (patchCoffee.originRegion() != null) {
-            coffee.setOriginRegion(patchCoffee.originRegion());
+        if (patchCoffee.getOriginRegion() != null) {
+            coffee.setOriginRegion(patchCoffee.getOriginRegion());
         }
-        if (patchCoffee.originCity() != null) {
-            coffee.setOriginCity(patchCoffee.originCity());
+        if (patchCoffee.getOriginCity() != null) {
+            coffee.setOriginCity(patchCoffee.getOriginCity());
         }
-        if (patchCoffee.altitude() != null) {
-            coffee.setAltitude(patchCoffee.altitude());
+        if (patchCoffee.getAltitude() != null) {
+            coffee.setAltitude(patchCoffee.getAltitude());
         }
-        if (patchCoffee.brand() != null) {
-            coffee.setBrand(patchCoffee.brand());
+        if (patchCoffee.getBrand() != null) {
+            coffee.setBrand(patchCoffee.getBrand());
         }
-        if (patchCoffee.tastingNotes() != null) {
-            coffee.setTastingNotes(patchCoffee.tastingNotes());
+        if (patchCoffee.getTastingNotes() != null) {
+            coffee.setTastingNotes(patchCoffee.getTastingNotes());
         }
-        if (patchCoffee.roaster() != null) {
-            coffee.setRoaster(patchCoffee.roaster());
+        if (patchCoffee.getRoaster() != null) {
+            coffee.setRoaster(patchCoffee.getRoaster());
         }
-        if (patchCoffee.roastLevel() != null) {
-            coffee.setRoastLevel(patchCoffee.roastLevel());
+        if (patchCoffee.getRoastLevel() != null) {
+            coffee.setRoastLevel(patchCoffee.getRoastLevel());
         }
-        if (patchCoffee.price() != null) {
-            coffee.setPrice(patchCoffee.price());
+        if (patchCoffee.getPrice() != null) {
+            coffee.setPrice(patchCoffee.getPrice());
         }
 
+        coffee.setUpdatedAt(LocalDateTime.now());
         return repository.save(coffee);
     }
 }

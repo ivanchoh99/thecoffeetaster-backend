@@ -11,5 +11,5 @@ public interface CoffeeUseCase {
     Page<Coffee> get(int page, int pageSize);
     Coffee get(UUID id);
     Coffee put(Coffee coffee);
-    Coffee patch(UUID id, CoffeePatch coffee);
+    Coffee patch(UUID id, Coffee coffee);
 }

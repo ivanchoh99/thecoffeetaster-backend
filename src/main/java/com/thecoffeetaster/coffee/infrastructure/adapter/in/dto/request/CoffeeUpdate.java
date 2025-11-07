@@ -22,7 +22,7 @@ public record CoffeeUpdate(
         String tastingNotes,
         String roaster,
         @NotNull(message = "The roast level is mandatory")
-        RoastLevel roastLevel,
+        String roastLevel,
         @NotNull(message = "Price is mandatory")
         @DecimalMin(value = "0.01", message = "Price must be greater than 0")
         BigDecimal price

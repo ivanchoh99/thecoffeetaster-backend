@@ -17,7 +17,7 @@ public record CoffeePatch(
         String brand,
         String tastingNotes,
         String roaster,
-        RoastLevel roastLevel,
+        String roastLevel,
         @DecimalMin(value = "0.01", message = "Price must be greater than 0")
         BigDecimal price
 ) {}
