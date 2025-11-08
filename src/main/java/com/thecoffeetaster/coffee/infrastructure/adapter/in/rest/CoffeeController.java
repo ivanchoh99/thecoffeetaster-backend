@@ -55,7 +55,7 @@ public class CoffeeController {
         BeanType beanType = beanTypeService.get(UUID.fromString(coffeeUpdate.beanType()));
         ProcessingMethod processingMethod = processingMethodService.get(UUID.fromString(coffeeUpdate.processingMethod()));
         Coffee coffee = CoffeeMapper.toDomain(coffeeUpdate, beanType, processingMethod);
-        Coffee coffeeUpdated = service.put(coffee);
+        Coffee coffeeUpdated = service.update(coffee);
         return ResponseEntity.ok(coffeeUpdated);
     }
 

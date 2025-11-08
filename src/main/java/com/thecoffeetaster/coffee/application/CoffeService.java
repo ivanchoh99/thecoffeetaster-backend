@@ -45,7 +45,7 @@ public class CoffeService implements CoffeeUseCase {
     }
 
     @Override
-    public Coffee put(Coffee putCoffee) {
+    public Coffee update(Coffee putCoffee) {
         putCoffee.setUpdatedAt(LocalDateTime.now());
         return repository.save(putCoffee);
     }
