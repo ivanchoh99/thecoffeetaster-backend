@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
-@RestController("/api/beanType")
+@RestController
+@RequestMapping("/api/beanType")
 public class BeanTypeController {
 
     private final BeanTypeUseCase service;
@@ -28,13 +29,13 @@ public class BeanTypeController {
     }
 
     @GetMapping
-    public ResponseEntity<BeanType> get(@RequestParam String id){
+    public ResponseEntity<BeanType> get(@RequestParam String id) {
         BeanType beanType = service.get(UUID.fromString(id));
         return ResponseEntity.ok(beanType);
     }
 
     @PutMapping
-    public ResponseEntity<BeanType> put(@RequestBody BeanType beanTypeUpdate){
+    public ResponseEntity<BeanType> put(@RequestBody BeanType beanTypeUpdate) {
         BeanType beanType = service.update(beanTypeUpdate);
         return ResponseEntity.ok(beanType);
     }

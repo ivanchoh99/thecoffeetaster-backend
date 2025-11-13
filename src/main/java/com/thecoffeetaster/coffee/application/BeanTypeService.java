@@ -4,13 +4,14 @@ import com.thecoffeetaster.coffee.domain.model.BeanType;
 import com.thecoffeetaster.coffee.domain.port.in.BeanTypeUseCase;
 import com.thecoffeetaster.coffee.domain.port.out.BeanTypeRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BeanTypeService implements BeanTypeUseCase {
 
     private final BeanTypeRepository repository;

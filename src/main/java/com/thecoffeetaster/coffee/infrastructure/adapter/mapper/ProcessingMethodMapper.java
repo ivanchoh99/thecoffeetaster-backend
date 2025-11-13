@@ -9,7 +9,7 @@ public class ProcessingMethodMapper {
         throw new IllegalStateException("Mapper Class");
     }
 
-    public static ProcessingMethodEntity toEnity(ProcessingMethod processingMethod) {
+    public static ProcessingMethodEntity toEntity(ProcessingMethod processingMethod) {
         return ProcessingMethodEntity.builder()
                 .id(processingMethod.getId())
                 .name(processingMethod.getName())
