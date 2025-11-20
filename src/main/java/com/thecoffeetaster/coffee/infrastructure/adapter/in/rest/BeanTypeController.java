@@ -28,8 +28,8 @@ public class BeanTypeController {
         return ResponseEntity.ok(beanTypes);
     }
 
-    @GetMapping
-    public ResponseEntity<BeanType> get(@RequestParam String id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<BeanType> get(@PathVariable String id) {
         BeanType beanType = service.get(UUID.fromString(id));
         return ResponseEntity.ok(beanType);
     }

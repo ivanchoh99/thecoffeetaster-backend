@@ -51,7 +51,7 @@ public class CoffeeMapper {
 
     public static CoffeeEntity toEntity(Coffee coffee) {
         BeanTypeEntity beanTypeEntity = BeanTypeMapper.toEntity(coffee.getBeanType());
-        ProcessingMethodEntity processingMethodEntity = ProcessingMethodMapper.toEnity(coffee.getProcessingMethod());
+        ProcessingMethodEntity processingMethodEntity = ProcessingMethodMapper.toEntity(coffee.getProcessingMethod());
         return CoffeeEntity.builder()
                 .id(coffee.getId())
                 .brand(coffee.getBrand())

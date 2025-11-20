@@ -28,8 +28,8 @@ public class ProcessingMethodController {
         return ResponseEntity.ok(processingMethod);
     }
 
-    @GetMapping
-    public ResponseEntity<ProcessingMethod> get(@RequestParam String id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<ProcessingMethod> get(@PathVariable String id) {
         ProcessingMethod processingMethod = service.get(UUID.fromString(id));
         return ResponseEntity.ok(processingMethod);
     }

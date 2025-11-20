@@ -36,8 +36,8 @@ public class CoffeeController {
         return ResponseEntity.ok(service.create(coffee));
     }
 
-    @GetMapping
-    public ResponseEntity<Coffee> getCoffee(@RequestParam String id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Coffee> getCoffee(@PathVariable String id) {
         Coffee coffee = service.get(UUID.fromString(id));
         return ResponseEntity.ok(coffee);
     }
@@ -70,8 +70,8 @@ public class CoffeeController {
         if (coffeePatch.beanType() != null) beanType = beanTypeService.get(UUID.fromString(coffeePatch.beanType()));
         if (coffeePatch.beanType() != null) processingMethod = processingMethodService.get(UUID.fromString(coffeePatch.processingMethod()));
 
-        Coffee cofffeToPatch = CoffeeMapper.toDomain(coffeePatch, beanType, processingMethod);
-        Coffee coffee = service.patch(UUID.fromString(id), cofffeToPatch);
+        Coffee coffeeToPatch = CoffeeMapper.toDomain(coffeePatch, beanType, processingMethod);
+        Coffee coffee = service.patch(UUID.fromString(id), coffeeToPatch);
         return ResponseEntity.ok(coffee);
     }
 

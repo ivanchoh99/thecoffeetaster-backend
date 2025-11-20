@@ -1,11 +1,9 @@
 package com.thecoffeetaster.coffee.infrastructure.adapter.out.persistence.entity;
 
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -13,6 +11,7 @@ import java.util.UUID;
 @Builder
 @Getter
 @Entity
+@Table(name = "coffee")
 public class CoffeeEntity {
     @Id
     private UUID id;
