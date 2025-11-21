@@ -19,7 +19,6 @@ public class Coffee {
     private String originCity;
     private Integer altitude;
     private String brand;
-    private String tastingNotes;
     private String roaster;
     private RoastLevel roastLevel;
     private BigDecimal price;
@@ -35,7 +34,6 @@ public class Coffee {
         this.originCity = builder.originCity;
         this.altitude = builder.altitude;
         this.brand = builder.brand;
-        this.tastingNotes = builder.tastingNotes;
         this.roaster = builder.roaster;
         this.roastLevel = builder.roastLevel;
         this.price = builder.price;
@@ -54,7 +52,6 @@ public class Coffee {
         private String originCountry;
         private String originRegion;
         private String originCity;
-        private String tastingNotes;
         private String roaster;
         private RoastLevel roastLevel = RoastLevel.UNKNOWN;
         private LocalDateTime createdAt;
@@ -100,10 +97,6 @@ public class Coffee {
             return this;
         }
 
-        public Builder tastingNotes(String tastingNotes) {
-            this.tastingNotes = tastingNotes;
-            return this;
-        }
 
         public Builder roaster(String roaster) {
             this.roaster = roaster;
