@@ -14,5 +14,4 @@ public class CoffeeBrew {
     private Integer coffeeWeight;
     private Integer waterWeight;
     private Integer waterTemperature;
-
 }
