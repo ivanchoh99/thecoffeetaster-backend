@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-thecoffeetaster
+    environment:
+      POSTGRES_DB: shop
+      POSTGRES_USER: shop
+      POSTGRES_PASSWORD: shop
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_thecoffeetaster:/var/lib/postgresql/data
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-thecoffeetaster
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data_thecoffeetaster:/data/db
+  thecoffeetaster:
+    container_name: "thecoffeetaster_backend"
+    build:
+      context: thecoffeetaster
+      dockerfile: Dockerfile
+    image: thecoffeetaster:latest
+    ports:
+      - "8080:8080"
