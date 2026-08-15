@@ -1,12 +1,12 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.5.7"
-	id("io.spring.dependency-management") version "1.1.7"
+	id("org.springframework.boot") version libs.versions.spring.boot
+	id("io.spring.dependency-management") version libs.versions.dependency.managment
 }
 
 group = "com"
 version = "0.0.1-SNAPSHOT"
-description = "Demo project for Spring Boot"
+description = ""
 
 java {
 	toolchain {
@@ -19,10 +19,15 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter")
-    implementation("javax.persistence:javax.persistence-api:2.2")
-    implementation("org.springframework:spring-web:6.2.12")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation(libs.spring.boot.starter)
+    implementation(libs.spring.boot.web.starter)
+	implementation(libs.spring.boot.data.jpa.starter)
+	implementation(libs.spring.boot.validation.starter)
+	implementation(libs.spring.boot.security.starter)
+	implementation(libs.spring.boot.logging.starter)
+	compileOnly(libs.lombok)
+	annotationProcessor(libs.lombok)
+	testImplementation(libs.spring.boot.test.starter)
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

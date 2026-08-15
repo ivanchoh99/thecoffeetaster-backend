@@ -1,0 +1,17 @@
+[versions]
+spring-boot = "4.1.0"
+dependency-managment = "1.1.7"
+
+[libraries]
+spring-boot-starter = {module = "org.springframework.boot:spring-boot-starter", version.ref = "spring-boot"}
+spring-boot-web-starter = {module = "org.springframework.boot:spring-boot-starter-web", version.ref = "spring-boot"}
+spring-boot-test-starter = {module = "org.springframework.boot:spring-boot-starter-test", version.ref = "spring-boot"}
+spring-boot-validation-starter = {module = "org.springframework.boot:spring-boot-starter-validation" , version.ref = "spring-boot"}
+spring-boot-data-jpa-starter = {module = "org.springframework.boot:spring-boot-starter-data-jpa", version.ref = "spring-boot"}
+spring-boot-security-starter = {module = "org.springframework.boot:spring-boot-starter-security", version.ref = "spring-boot"}
+spring-boot-logging-starter = {module = "org.springframework.boot:spring-boot-starter-logging", version.ref = "spring-boot"}
+lombok = {module = "org.projectlombok:lombok"}
+
+[bundles]
+
+[plugins]
