@@ -1,16 +1,17 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
 	java
 	id("org.springframework.boot") version libs.versions.spring.boot
 	id("io.spring.dependency-management") version libs.versions.dependency.managment
 }
 
-group = "com"
-version = "0.0.1-SNAPSHOT"
-description = ""
+group = "com.thecoffeetaster"
+version = "1.0.0"
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(25)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
@@ -33,4 +34,15 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.named<Jar>("jar") {
+	enabled = false
+}
+
+tasks.named<BootJar>("bootJar") {
+	layered {
+		enabled = true
+	}
+	archiveFileName.set("app.jar")
 }
