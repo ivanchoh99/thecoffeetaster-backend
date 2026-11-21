@@ -2,7 +2,6 @@ package com.thecoffeetaster.entity
 
 import jakarta.persistence.*
 import java.time.Instant
-import java.util.UUID
 
 @Entity
 @Table(
@@ -18,8 +17,8 @@ open class PasswordResetToken(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
-    @Column(name = "user_id", nullable = false, columnDefinition = "UUID")
-    var userId: UUID,
+    @Column(name = "user_id", nullable = false)
+    var userId: Long,
 
     @Column(nullable = false)
     var tokenHash: String,
@@ -32,13 +31,6 @@ open class PasswordResetToken(
     @Column(nullable = false)
     var expiresAt: Instant
 ) {
-
-    @PrePersist
-    protected fun onCreate() {
-        if (createdAt == null) {
-            createdAt = Instant.now()
-        }
-    }
 
     fun isExpired(): Boolean {
         return Instant.now().isAfter(expiresAt)

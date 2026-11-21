@@ -41,42 +41,13 @@ open class User(
     var updatedAt: Instant = Instant.now()
 ) {
 
-    @PrePersist
-    protected fun onCreate() {
-        if (uuid == null) {
-            uuid = UUID.randomUUID()
-        }
-        if (createdAt == null) {
-            createdAt = Instant.now()
-        }
-        if (updatedAt == null) {
-            updatedAt = Instant.now()
-        }
-        if (role == Role.ROLE_USER && id == null) {
-            // role defaults handled by parameter default
-        }
-        if (failedLoginCounter == 0) {
-            // already 0 by default
-        }
-        if (!lockedOut) {
-            // already false by default
-        }
-    }
-
     @PreUpdate
     protected fun onUpdate() {
         updatedAt = Instant.now()
     }
 
-    fun isLocked(): Boolean {
-        if (!lockedOut) {
-            return false
-        }
-        if (lockUntil == null) {
-            return true
-        }
-        return Instant.now().isBefore(lockUntil)
-    }
+    fun isLocked(): Boolean =
+        lockedOut && (lockUntil?.let { Instant.now().isBefore(it) } ?: true)
 
     fun clearLockout() {
         this.lockedOut = false

@@ -2,7 +2,6 @@ package com.thecoffeetaster.entity
 
 import jakarta.persistence.*
 import java.time.Instant
-import java.util.UUID
 
 @Entity
 @Table(name = "audit_logs", indexes = [
@@ -17,7 +16,7 @@ open class AuditLog(
     var id: Long? = null,
 
     @Column(name = "user_id", nullable = true)
-    var userId: UUID? = null,
+    var userId: Long? = null,
 
     @Column(name = "event_type", nullable = false)
     var eventType: String = "",

@@ -17,23 +17,23 @@ data class ApiResponse<T>(
         fun <T> success(message: String, data: T?): ApiResponse<T> =
             ApiResponse(Instant.now().toString(), "success", message, data)
 
-        fun <T> error(code: String, message: String): ApiResponse<T> =
+        fun error(code: String, message: String): ApiResponse<ErrorDetail> =
             ApiResponse(
                 Instant.now().toString(),
                 "client_error",
                 message,
-                ErrorDetail(code, message, null) as T
+                ErrorDetail(code, message, null)
             )
 
-        fun <T> error(code: String, message: String, field: String?): ApiResponse<T> =
+        fun error(code: String, message: String, field: String?): ApiResponse<ErrorDetail> =
             ApiResponse(
                 Instant.now().toString(),
                 "client_error",
                 message,
-                ErrorDetail(code, message, field) as T
+                ErrorDetail(code, message, field)
             )
 
-        fun <T> serverError(message: String): ApiResponse<T> =
+        fun serverError(message: String): ApiResponse<ErrorDetail> =
             ApiResponse(Instant.now().toString(), "server_error", message, null)
     }
 }

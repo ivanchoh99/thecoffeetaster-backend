@@ -2,7 +2,6 @@ package com.thecoffeetaster.entity
 
 import jakarta.persistence.*
 import java.time.Instant
-import java.util.UUID
 
 @Entity
 @Table(name = "revoked_tokens", indexes = [
@@ -15,7 +14,7 @@ open class RevokedToken(
     var id: Long? = null,
 
     @Column(name = "user_id", nullable = false)
-    var userId: UUID,
+    var userId: Long,
 
     @Column(nullable = false)
     var tokenHash: String,

@@ -18,10 +18,11 @@ CREATE INDEX idx_revoked_tokens_user_id ON revoked_tokens(user_id);
 -- Permite rastrear sesiones activas y controlar la concurrencia de sesiones
 CREATE TABLE issued_refresh_tokens (
     id UUID PRIMARY KEY,
-    user_id UUID NOT NULL,
+    user_id BIGINT NOT NULL,
     token_hash VARCHAR(255) NOT NULL UNIQUE,
     issued_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    expires_at TIMESTAMP NOT NULL
+    expires_at TIMESTAMP NOT NULL,
+    CONSTRAINT fk_issued_refresh_tokens_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- Índice para búsquedas rápidas de tokens por usuario
@@ -35,11 +36,12 @@ CREATE INDEX idx_issued_refresh_tokens_expires_at ON issued_refresh_tokens(expir
 -- Cada token es de un solo uso y tiene una fecha de expiración
 CREATE TABLE password_reset_tokens (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id UUID NOT NULL,
+    user_id BIGINT NOT NULL,
     token_hash VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     used_at TIMESTAMP,
-    expires_at TIMESTAMP NOT NULL
+    expires_at TIMESTAMP NOT NULL,
+    CONSTRAINT fk_password_reset_tokens_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- Índice para búsquedas rápidas de tokens por usuario

@@ -19,7 +19,7 @@ open class IssuedRefreshToken(
     var id: UUID = UUID.randomUUID(),
 
     @Column(nullable = false)
-    var userId: UUID,
+    var userId: Long,
 
     @Column(nullable = false, unique = true)
     var tokenHash: String,
