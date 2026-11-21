@@ -4,20 +4,21 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@RequestMapping("/api/v1/coffees")
 class CoffeeController {
 
     @PostMapping
-    fun createCoffee() {}
+    fun createCoffee(): ResponseEntity<Void> = ResponseEntity.noContent().build()
+
+    @GetMapping("/{id}")
+    fun getCoffee(@PathVariable id: String): ResponseEntity<Void> = ResponseEntity.noContent().build()
 
     @GetMapping
-    fun getCoffee(id: String) {}
+    fun getCoffees(): ResponseEntity<Void> = ResponseEntity.noContent().build()
 
-    @GetMapping
-    fun getCoffees() {}
+    @PatchMapping("/{id}")
+    fun patchCoffee(@PathVariable id: String): ResponseEntity<Void> = ResponseEntity.noContent().build()
 
-    @PatchMapping
-    fun patchUser() {}
-
-    @PutMapping
-    fun putUser() {}
+    @PutMapping("/{id}")
+    fun putCoffee(@PathVariable id: String): ResponseEntity<Void> = ResponseEntity.noContent().build()
 }

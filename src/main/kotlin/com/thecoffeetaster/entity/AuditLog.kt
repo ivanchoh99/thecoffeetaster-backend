@@ -1,6 +1,8 @@
 package com.thecoffeetaster.entity
 
 import jakarta.persistence.*
+import org.hibernate.annotations.JdbcTypeCode
+import org.hibernate.type.SqlTypes
 import java.time.Instant
 
 @Entity
@@ -21,7 +23,7 @@ open class AuditLog(
     @Column(name = "event_type", nullable = false)
     var eventType: String = "",
 
-    @Column(name = "timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "timestamp", nullable = false, columnDefinition = "TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP")
     var timestamp: Instant = Instant.now(),
 
     @Column(name = "ip_address", nullable = true)
@@ -33,36 +35,7 @@ open class AuditLog(
     @Column(name = "count", nullable = true)
     var count: Int? = null,
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "details", nullable = true, columnDefinition = "jsonb")
     var details: String? = null
-) {
-
-    override fun toString(): String {
-        return "AuditLog(id=$id, userId=$userId, eventType='$eventType', timestamp=$timestamp, ipAddress='$ipAddress', reason='$reason', count=$count, details='$details')"
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is AuditLog) return false
-        return id == other.id &&
-            userId == other.userId &&
-            eventType == other.eventType &&
-            timestamp == other.timestamp &&
-            ipAddress == other.ipAddress &&
-            reason == other.reason &&
-            count == other.count &&
-            details == other.details
-    }
-
-    override fun hashCode(): Int {
-        var result = id?.hashCode() ?: 0
-        result = 31 * result + (userId?.hashCode() ?: 0)
-        result = 31 * result + eventType.hashCode()
-        result = 31 * result + timestamp.hashCode()
-        result = 31 * result + (ipAddress?.hashCode() ?: 0)
-        result = 31 * result + (reason?.hashCode() ?: 0)
-        result = 31 * result + (count?.hashCode() ?: 0)
-        result = 31 * result + (details?.hashCode() ?: 0)
-        return result
-    }
-}
+)

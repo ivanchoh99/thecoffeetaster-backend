@@ -1,16 +1,18 @@
 package com.thecoffeetaster.entity
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
 import java.util.UUID
 
 @Entity
+@Table(name = "bean_type")
 open class BeanType(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: UUID = UUID.randomUUID(),
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null,
 
+    @Column(nullable = false, unique = true, columnDefinition = "UUID")
+    var uuid: UUID = UUID.randomUUID(),
+
+    @Column(nullable = false)
     var name: String = ""
 )

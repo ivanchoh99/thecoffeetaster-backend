@@ -16,7 +16,7 @@ open class IssuedRefreshToken(
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    var id: UUID = UUID.randomUUID(),
+    var id: UUID? = null,
 
     @Column(nullable = false)
     var userId: Long,

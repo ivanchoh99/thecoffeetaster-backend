@@ -69,3 +69,20 @@ data class RefreshResponse(
 data class CurrentUserResponse(
     @get:JsonProperty("user") val user: UserProfile
 )
+
+/**
+ * Internal carrier returned by AuthService so the controller can set the
+ * refresh token as an HttpOnly cookie. Not serialized directly.
+ */
+data class AuthSession(
+    val response: LoginResponse,
+    val refreshToken: String
+)
+
+/**
+ * Internal carrier for the refresh flow (new access token + rotated refresh token).
+ */
+data class RefreshSession(
+    val response: RefreshResponse,
+    val refreshToken: String
+)

@@ -21,6 +21,6 @@ open class RevokedToken(
 
     var reason: String? = null,
 
-    @Column(name = "revoked_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "revoked_at", nullable = false, columnDefinition = "TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP")
     var revokedAt: Instant = Instant.now()
 )

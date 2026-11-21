@@ -25,6 +25,7 @@ class JwtProvider(
         val expiration = now.plusSeconds(accessTokenExpiry.toLong())
 
         return Jwts.builder()
+            .id(UUID.randomUUID().toString())
             .subject(userId.toString())
             .claim("email", email)
             .claim("role", role)
@@ -39,6 +40,7 @@ class JwtProvider(
         val expiration = now.plusSeconds(refreshTokenExpiry.toLong())
 
         return Jwts.builder()
+            .id(UUID.randomUUID().toString())
             .subject(userId.toString())
             .claim("type", "refresh")
             .issuedAt(Date.from(now))
@@ -52,6 +54,7 @@ class JwtProvider(
         val expiration = now.plusSeconds(passwordResetTokenExpiry.toLong())
 
         return Jwts.builder()
+            .id(UUID.randomUUID().toString())
             .subject(userId.toString())
             .claim("type", "password_reset")
             .issuedAt(Date.from(now))
@@ -105,6 +108,10 @@ class JwtProvider(
     fun extractTokenType(token: String): String? {
         val claims = getClaims(token).orElseThrow { IllegalArgumentException("Cannot extract token type from invalid token") }
         return claims.get("type", String::class.java)
+    }
+
+    fun getExpiration(token: String): Instant? {
+        return getClaims(token).map { it.expiration.toInstant() }.orElse(null)
     }
 
     fun hashToken(token: String): String {
